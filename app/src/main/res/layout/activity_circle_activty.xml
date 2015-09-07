@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/circle_bg"
+    >
+    <include layout="@layout/top_bar"
+        android:id="@+id/topbar"
+        />
+
+    <RadioGroup
+        android:id="@+id/circle_rg"
+        android:layout_width="280dp"
+        android:layout_height="38dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/rg_totop_size"
+        >
+
+        <RadioButton
+            android:id="@+id/circle_rb_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/circle_today"
+            android:textColor="@color/color_text_rb_selector"
+            android:background="@drawable/bg_rg_selector"
+            android:textSize="14sp"
+            android:paddingTop="@dimen/rg_top_padding"
+            android:paddingLeft="@dimen/rg_left_padding"
+            android:paddingRight="@dimen/rg_left_padding"
+            android:paddingBottom="@dimen/rg_top_padding"
+            android:checked="false" />
+        <RadioButton
+            android:id="@+id/circle_rb_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/circle_history"
+            android:textColor="@color/color_text_rb_selector"
+            android:background="@drawable/bg_rg_selector"
+            android:textSize="14sp"
+            android:paddingTop="@dimen/rg_top_padding"
+            android:paddingLeft="@dimen/rg_left_padding"
+            android:paddingRight="@dimen/rg_left_padding"
+            android:paddingBottom="@dimen/rg_top_padding"
+            />
+
+
+    </RadioGroup>
+
+    <FrameLayout
+
+        android:id="@+id/circle_content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:layout_below="@id/circle_rg"
+        android:layout_marginTop="4dp"
+        />
+
+</RelativeLayout>

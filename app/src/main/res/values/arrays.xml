@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="share_notice">
+
+        <item>长期坐在办公室，注意身体</item>
+        <item>步行能增强心脏功能，使心脏慢而有力</item>
+        <item>步行能够增加记忆力</item>
+        <item>每天下午步行半个小时，全身放松了</item>
+        <item>步行能增强血管弹性，减少血管破裂的可能性</item>
+        <item>步行可以增强消化腺的分泌功能</item>
+
+
+    </string-array>
+</resources>

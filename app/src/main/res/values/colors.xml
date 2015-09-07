@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>b
+
+    <color name="transparent">#00000000</color>
+    <color name="color_bg_selected">#FC0001</color>
+    <color name="color_bg_normal">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    
+    <!--topbar-->
+    <color name="top_bar_bg">#40ffffff</color>
+    <color name="text_selected">#888</color>
+
+    <!--register-->
+    <color name="register_bg">#EDEDED</color>
+
+    <color name="register_text_color">#424242</color>
+
+    <color name="register_red">#FC0001</color>
+
+    <!--login-->
+
+    <color name="login_bg">#70ffffff</color>
+
+    <!--circle-->
+
+    <color name="circle_texe_color">#C18414</color>
+
+    <color name="circle_bg">#3C3C3C</color>
+
+    <color name="circle_devider_color">#EAEAEA</color>
+
+    <!--history record-->
+
+    <color name="history_record_bg">#d0ffffff</color>
+
+</resources>

@@ -1,0 +1,281 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@mipmap/main_bg"
+    android:orientation="vertical"
+
+    >
+
+    <include
+
+        android:id="@+id/topbar"
+        layout="@layout/top_bar" />
+
+    <RadioGroup
+        android:id="@+id/register_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/register_rb_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:drawableBottom="@drawable/bg_man_selector"
+            android:drawableTop="@mipmap/man"
+            android:gravity="center"
+            android:paddingBottom="@dimen/rg_top_padding"
+            android:paddingLeft="@dimen/rg_left_padding"
+            android:paddingRight="@dimen/rg_left_padding"
+            android:paddingTop="@dimen/rg_top_padding"
+            android:textColor="@color/color_text_rb_selector"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/register_rb_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:drawableBottom="@drawable/bg_woman_selector"
+            android:drawableTop="@mipmap/woman"
+            android:gravity="center"
+            android:paddingBottom="@dimen/rg_top_padding"
+            android:paddingLeft="@dimen/rg_left_padding"
+            android:paddingRight="@dimen/rg_left_padding"
+            android:paddingTop="@dimen/rg_top_padding"
+            android:textColor="@color/color_text_rb_selector"
+            android:textSize="14sp" />
+
+
+    </RadioGroup>
+
+    <LinearLayout
+
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/conner_circle_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="6dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/username" />
+
+        <EditText
+
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@null"
+            android:hint="用户名："
+            android:textColor="@color/register_text_color"
+            android:textColorHint="@color/register_text_color"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+        android:background="@color/transparent" />
+
+    <LinearLayout
+
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/conner_circle_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="6dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/password" />
+
+        <EditText
+
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="密码："
+            android:password="true"
+            android:textColor="@color/register_text_color"
+            android:textColorHint="@color/register_text_color"
+
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+        android:background="@color/transparent" />
+
+    <LinearLayout
+
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/conner_circle_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="6dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/orangekey_icon" />
+
+        <EditText
+            android:id="@+id/et_orangekey"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@null"
+            android:hint="推荐码："
+            android:textColor="@color/register_text_color"
+            android:textColorHint="@color/register_text_color"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+        android:background="@color/transparent" />
+
+    <LinearLayout
+
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/conner_circle_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="6dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/realname" />
+
+        <EditText
+            android:id="@+id/et_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@null"
+            android:hint="真实姓名："
+            android:textColor="@color/register_text_color"
+            android:textColorHint="@color/register_text_color"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+        android:background="@color/transparent" />
+
+    <LinearLayout
+
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/conner_circle_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="6dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/tel_icon" />
+
+        <EditText
+            android:id="@+id/et_phonenum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="手机号：（选填）"
+            android:textColor="@color/register_text_color"
+            android:textColorHint="@color/register_text_color"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+        android:background="@color/transparent" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_pressed_selector"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="130dp"
+            android:text="已注册?"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="立刻登录"
+            android:textColor="@color/register_red"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

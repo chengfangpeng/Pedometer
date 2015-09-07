@@ -1,0 +1,23 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+
+    <!--top_bar-->
+    <dimen name="top_bar_title_size">20sp</dimen>
+    <dimen name="top_bar_height">48dp</dimen>
+    
+    <!--home-->
+    <dimen name="rg_totop_size">58sp</dimen>
+    <dimen name="rg_top_padding">8dp</dimen>
+    <dimen name="rg_left_padding">20dp</dimen>
+
+    <!--register-->
+
+    <!--share-->
+
+    <dimen name="tool_bar_height">56dp</dimen>
+
+</resources>

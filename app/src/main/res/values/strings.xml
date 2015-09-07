@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">足迹</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    
+    <!--home-->
+
+    <string name="today_steps">今日步数</string>
+    <string name="history_steps">历史记录</string>
+    <string name="top_bar_title">健康动起来</string>
+    <string name="submit_data">上传数据</string>
+    <string name="circle">朋友圈</string>
+    <string name="title_activity_register_activity_">RegisterActivity_</string>
+
+    <!--register-->
+    <string name="boy">帅哥</string>
+    <string name="girl">美女</string>
+    <string name="register">注册</string>
+    
+    <!--login-->
+    <string name="login">登录</string>
+    <string name="title_activity_circle_activty">CircleActivty</string>
+
+    <!--circle-->
+
+    <string name="circle_today">今日</string>
+    <string name="circle_history">历史累计</string>
+
+    <!--app-->
+    <string name="double_click_exit">再点击一次退出应用</string>
+</resources>

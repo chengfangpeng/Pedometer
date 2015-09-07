@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        >
+
+
+
+
+    <ImageView
+
+        android:id="@+id/iv_circle_avator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@mipmap/man"
+        android:layout_margin="4dp"
+        />
+
+
+        <TextView
+            android:id="@+id/circle_realname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="realname"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/circle_texe_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/circle_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:paddingLeft="9dp"
+            android:paddingRight="9dp"
+            android:gravity="center"
+            android:text="步数"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/circle_texe_color"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/circle_devider_color"
+        />
+
+</LinearLayout>
