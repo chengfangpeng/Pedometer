@@ -63,6 +63,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private FragmentManager fragmentManager;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +100,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         JsonObjectRequest request = new JsonObjectRequest(RequestUrl.getVersionUpdate(), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                System.out.println("版本更新" + jsonObject.toString());
                 try {
                     if (jsonObject == null) {
                         return;
