@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by heaven on 2015/7/29.
@@ -28,6 +29,7 @@ public class DateFormatUtils {
     public static String getMonthByDate(String date)  {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         String month = null;
 
         try {

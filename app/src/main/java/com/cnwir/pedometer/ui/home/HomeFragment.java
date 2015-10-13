@@ -12,6 +12,7 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,6 +57,8 @@ import java.util.TimerTask;
  * Created by heaven on 2015/7/17.
  */
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
+
+    private static final String TAG = "HomeFragment";
 
     public static final String SPSENSORSTEPS = "pedometer";
 
@@ -136,6 +140,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         String date = sdf.format(new Date());
         System.out.println("flag = " + StepService.flag);
         if (StepService.flag) {
@@ -187,6 +192,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         String date = sdf.format(new Date());
         final boolean isToday = pedometerDB.loadSteps(App.getInstance().getUser().getId(), date) != null;
 
@@ -207,6 +213,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
                 System.out.println("enent[0] = " + event.values[0]);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
                 sdf.format(new Date());
                 int sensorSteps = SharedPrefUtils.getSensorStepsLately(mActivity, SPSENSORSTEPS);
                 User user = App.getInstance().getUser();
@@ -282,6 +289,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             List<Step> sevenSteps = new ArrayList<Step>();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
             User user = App.getInstance().getUser();
 
 
@@ -313,6 +321,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("token", App.getInstance().getUser().getToken());
+        Log.d(TAG, "上传数据用户的token = " + App.getInstance().getUser().getToken());
         map.put("d", submitData);
 //
         NormalPostRequest request = new NormalPostRequest(RequestUrl.submitData(), new Response.Listener<JSONObject>() {
@@ -375,9 +384,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private void saveDataUnderKitkat() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         sdf.format(new Date());
         User user = App.getInstance().getUser();
         String date = sdf.format(new Date());
+        Log.d(TAG, "today is " + date);
         //先到数据库查找今天是否有数据，如果有数据则更新数据，否则添加数据
         Step saveStep = pedometerDB.loadSteps(App.getInstance().getUser().getId(), date);
 

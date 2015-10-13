@@ -30,4 +30,10 @@
 
     <!--app-->
     <string name="double_click_exit">再点击一次退出应用</string>
+    <!--version update-->
+    <string name="download_cancel">取消更新</string>
+    <string name="update_now">马上更新</string>
+    <string name="update_later">稍后再说</string>
+    <string name="download_background">后台下载</string>
+
 </resources>

@@ -1,6 +1,10 @@
 package com.cnwir.pedometer.ui.update;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,10 +16,13 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.ResultReceiver;
+import android.os.SystemClock;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 
 import com.cnwir.pedometer.R;
+import com.cnwir.pedometer.view.CommonDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +39,7 @@ import java.util.zip.GZIPInputStream;
 /**
  * Created by heaven on 2015/9/7.
  */
-public class UpdateChecker{
+public class UpdateChecker {
 
     private static final String TAG = "UpdateChecker";
     private Context mContext;
@@ -41,8 +48,14 @@ public class UpdateChecker{
     private AppVersion mAppVersion;
     //下载apk的对话框
     private ProgressDialog mProgressDialog;
+    private static final int NOTIFICATION_ID = 1;
 
     private File apkFile;
+
+    private Notification.Builder builder;
+    private NotificationManager manager;
+
+    private static boolean isRunBackground;
 
     public UpdateChecker(Context context) {
         mContext = context;
@@ -52,6 +65,21 @@ public class UpdateChecker{
         mProgressDialog.setIndeterminate(false);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setCancelable(true);
+        mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE, "取消更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DownloadService.isStopService = true;
+
+            }
+        });
+        mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "后台下载", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+            }
+        });
+
         mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -65,21 +93,23 @@ public class UpdateChecker{
 
             }
         });
+
+
     }
 
     public void checkForUpdates(final String json) {
-        final  Handler handler = new Handler(){
+        final Handler handler = new Handler() {
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     mAppVersion = (AppVersion) msg.obj;
-                    try{
+                    try {
                         int versionCode = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionCode;
                         if (mAppVersion.getVersion() > versionCode) {
                             showUpdateDialog();
                         } else {
                             //Toast.makeText(mContext, "已经是最新版本", Toast.LENGTH_SHORT).show();
                         }
-                    }catch (PackageManager.NameNotFoundException ignored) {
+                    } catch (PackageManager.NameNotFoundException ignored) {
                         //
                     }
                 }
@@ -92,18 +122,19 @@ public class UpdateChecker{
                 //if (isNetworkAvailable(mContext)) {
                 Message msg = new Message();
                 Log.i("jianghejie", "json = " + json);
-                if(json!=null){
+                if (json != null) {
                     AppVersion appVersion = parseJson(json);
                     msg.what = 1;
                     msg.obj = appVersion;
                     handler.sendMessage(msg);
-                }else{
+                } else {
                     Log.e(TAG, "can't get app update json");
                 }
             }
         };
         mThread.start();
     }
+
     private AppVersion parseJson(String json) {
         AppVersion appVersion = new AppVersion();
         try {
@@ -120,39 +151,38 @@ public class UpdateChecker{
 
     public void showUpdateDialog() {
 
+        CommonDialog commonDialog = new CommonDialog();
+        commonDialog.setNegativeStr("以后再说");
+        commonDialog.setPositiveStr("立刻下载");
+        commonDialog.setTitle("发现新版本");
+        commonDialog.setPositiveListener(new CommonDialog.OnPositiveListener() {
+            @Override
+            public void onClick() {
+                builder = new Notification.Builder(mContext);
+                builder.setContentTitle("足迹").setContentText("正在下载...").setSmallIcon(R.mipmap.ic_launcher);
+                manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(NOTIFICATION_ID, builder.build());
+                downLoadApk();
+            }
+        });
+        FragmentActivity activity = (FragmentActivity) mContext;
+        commonDialog.show(activity.getSupportFragmentManager(), TAG);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 
-        builder.setIcon(R.mipmap.ic_launcher);
-        builder.setTitle("有新版本");
-        builder.setMessage(mAppVersion.getUpdateMessage());
-        builder.setPositiveButton("立刻下载",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        downLoadApk();
-                    }
-                });
-        builder.setNegativeButton("以后再说",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                    }
-                });
-        builder.show();
     }
 
     public void downLoadApk() {
         String apkUrl = mAppVersion.getUrl();
-        String dir = mContext.getExternalFilesDir( "apk").getAbsolutePath();
+        String dir = mContext.getExternalFilesDir("apk").getAbsolutePath();
         File folder = Environment.getExternalStoragePublicDirectory(dir);
-        if(folder.exists() && folder.isDirectory()) {
+        if (folder.exists() && folder.isDirectory()) {
             //do nothing
-        }else {
+        } else {
             folder.mkdirs();
         }
 //        String filename = apkUrl.substring(apkUrl.lastIndexOf("/"),apkUrl.length());
         String filename = "zuji.apk";
-        String destinationFilePath =  dir + "/" + filename;
+        String destinationFilePath = dir + "/" + filename;
         apkFile = new File(destinationFilePath);
         mProgressDialog.show();
         Intent intent = new Intent(mContext, DownloadService.class);
@@ -167,28 +197,51 @@ public class UpdateChecker{
         public DownloadReceiver(Handler handler) {
             super(handler);
         }
+
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             super.onReceiveResult(resultCode, resultData);
             if (resultCode == DownloadService.UPDATE_PROGRESS) {
                 int progress = resultData.getInt("progress");
                 mProgressDialog.setProgress(progress);
+                Log.d(TAG, "下载进度 = " + progress);
+                builder.setProgress(100, progress, false);
+                manager.notify(NOTIFICATION_ID, builder.build());
+
                 if (progress == 100) {
                     mProgressDialog.dismiss();
+                    builder.setContentTitle("足迹");
+                    builder.setContentText("下载完成");
+                    builder.setProgress(0, 0, false);
+                    builder.setContentIntent(getPendingIntent());
+                    manager.notify(NOTIFICATION_ID, builder.build());
                     //如果没有设置SDCard写权限，或者没有sdcard,apk文件保存在内存中，需要授予权限才能安装
-                    String[] command = {"chmod","777",apkFile.toString()};
-                    try{
+                    String[] command = {"chmod", "777", apkFile.toString()};
+                    try {
                         ProcessBuilder builder = new ProcessBuilder(command);
                         builder.start();
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
                         mContext.startActivity(intent);
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                 }
             }
+            if (resultCode == DownloadService.DOWNLOADSTOP) {
+                builder.setContentTitle("足迹");
+                builder.setContentText("下载停止！");
+                builder.setProgress(0, 0, false);
+                manager.notify(NOTIFICATION_ID, builder.build());
+            }
         }
+    }
+
+    private PendingIntent getPendingIntent() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        return pendingIntent;
     }
 
 

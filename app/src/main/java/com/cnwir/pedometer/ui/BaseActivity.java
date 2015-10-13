@@ -1,6 +1,7 @@
 package com.cnwir.pedometer.ui;
 
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -11,7 +12,7 @@ import com.cnwir.pedometer.data.RequestManager;
 /**
  * Created by heaven on 2015/5/15.
  */
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends AppCompatActivity {
 
 
     protected void executeRequest(Request<?> request) {
